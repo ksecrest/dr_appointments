@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_022811) do
+ActiveRecord::Schema.define(version: 2021_06_09_024309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,10 @@ ActiveRecord::Schema.define(version: 2021_06_04_022811) do
   create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.string "dob"
-    t.string "contact_info"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "address"
+    t.string "email"
   end
 
   add_foreign_key "appointments", "doctors"
