@@ -9,8 +9,10 @@ roles = ['primary', 'derm', 'ent', 'surgeon', 'cardiologist' ]
         user = User.create(
             full_name: Faker::Name.name,
             dob: Faker::Date.birthday,
-            contact_info: Faker::Address.full_address
+            address: Faker::Address.full_address
+            email: Faker::Internet.safe_email
         )
+    end
             
 
     Appointment.create(
