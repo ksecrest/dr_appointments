@@ -2,6 +2,7 @@
 
 import React from 'react'
 const Users = ({ users }) => {
+  const { full_name, address, dob, email } = users
   return (
     <>
       <h1>Users</h1>
@@ -11,7 +12,9 @@ const Users = ({ users }) => {
       {
         users.map( (user) => (
           <div>
-            <a href={`/users/${user.id}`}>{user.full_name}</a>
+            <h3><a href={`/users/${user.id}`}>User's Page</a></h3>
+            <h3><a href={`/users/${user.id}/edit`}>Edit this user</a></h3>
+            <h3><a href={`/users/${user.id}`}>Delete this User</a></h3>
           </div>
         ))
       }
