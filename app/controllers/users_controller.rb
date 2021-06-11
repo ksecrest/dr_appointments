@@ -1,26 +1,18 @@
-class UsersController < ApplicationController
+class UsersController < ApplicationController  
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  
-  before_action: set_user, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @user = User.all
-    render_component: 'Users', props: { user: @users }
-
-
-  before_action :set_user, only:[:show, :edit, :update, :destroy]
   def index
     @users = User.all
     render component: 'Users', props: { users: @users }
   end
 
   def show
-    render component: 'Users', props: { user: @user }
+    render component: 'User', props: { user: @user }
   end
 
   def new
     @user = User.new
-    render component: 'Usernew', props: { user: @user }
+    render component: 'UserNew', props: { user: @user }
   end
 
   def create

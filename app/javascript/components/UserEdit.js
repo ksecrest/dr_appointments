@@ -2,14 +2,18 @@ import React from "react";
 
 const UserEdit = ({ user }) => {
 
-  const { full_name , id } = user
+  const { full_name , id, address, email, dob } = user
   const defaultFull_name = full_name ? full_name : "";
+  const defaultDob = dob ? dob : "";
+  const defaultAddress = address ? address : "";
+  const defaultEmail = email ? email : "";
   return (
     <>
-      <h1>Editing {full_name} :User</h1>
+      <h1>Editing {full_name}</h1>
       <form action={`/users/${id}`} method="post">
         <input type='hidden' name="_method" value="patch" />
-
+        <br />
+        <p>Full Name</p>
         <input
           placeholder="Full Name"
           type="text"
@@ -17,7 +21,8 @@ const UserEdit = ({ user }) => {
           defaultValue={defaultFull_name}
           name="user[full_name]"
         />
-
+        <br />
+        <p>Date of Birth</p>
         <input
           placeholder="dob"
           type="text"
@@ -25,14 +30,8 @@ const UserEdit = ({ user }) => {
           defaultValue={defaultDob}
           name="user[dob]"
         />
-        
-        <input
-          required
-          placeholder="address"
-          type="text"
-          defaultValue={defaultAddress}
-          name="user[address]"
-        />
+        <br />
+        <p>Email</p>
         <input
           required
           placeholder="email"
@@ -40,6 +39,16 @@ const UserEdit = ({ user }) => {
           defaultValue={defaultEmail}
           name="user[email]"
         />
+        <br />
+        <p>Address</p>
+        <input
+          required
+          placeholder="address"
+          type="text"
+          defaultValue={defaultAddress}
+          name="user[address]"
+        />
+        <br />
         <button type='submit'>Update</button>
       </form>
     </>

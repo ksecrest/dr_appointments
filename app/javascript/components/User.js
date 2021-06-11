@@ -1,11 +1,15 @@
 import React from 'react';
-const User = ({ user, doctors, full_name }) => {
-  const { id } = user
+
+const User = ({ user }) => {
+  const { id, full_name, dob, address, email, errors } = user
   return(
     <>
+      { errors && errors }
       <h1>{full_name}</h1>
-      <hr />
-      <h5>Doctors</h5>
+      <h2>Date of Birth: {dob}</h2>
+      <p>Email:<strong> { email }</strong></p>
+      <p>Address: <strong>{ address }</strong></p>
+      {/* <h5>Doctors</h5>
       <h6>{ doctors.length <= 0 ? "No Doctors" : "" }</h6>
       <ul>
         {
@@ -15,11 +19,16 @@ const User = ({ user, doctors, full_name }) => {
             </li>
           ))
         }
-      </ul>
-      <a href={`/users/${id}`} data-method="delete">
-        Delete user
-      </a>
+      </ul> */}
+      <a href={`/users/${id}/edit`}>Edit User</a>
+      <br />
+      <a href={``}>View appointments</a>
+      <br />
+      <a href={`/users`}>Back</a>
+      <br />
+      <br />
+      <a href={`/users/${id}`} data-method="delete">Delete user</a>
     </>
-  )
+  );
 }
 export default User;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const UserNew = ({ user }) => {
-  const { full_name, dob, errors } = user;
+  const { full_name, dob, address, email, errors } = user;
   const defaultFull_name = full_name ? full_name : "";
   const defaultDob = dob ? dob : "";
   const defaultAddress = address ? address : "";
@@ -43,7 +43,7 @@ const UserNew = ({ user }) => {
         <button type="submit">Add User</button>
       </form>
     </>
-  )
+  );
 }
 
 export default UserNew;
