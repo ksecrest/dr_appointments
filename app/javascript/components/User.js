@@ -6,12 +6,12 @@ const User = ({ user, doctors, full_name }) => {
       <h1>{full_name}</h1>
       <hr />
       <h5>Doctors</h5>
-      <h6>{ doctors.length <= 0 ? "No Courses" : "" }</h6>
+      <h6>{ doctors.length <= 0 ? "No Doctors" : "" }</h6>
       <ul>
         {
           doctors.map( (doctor) => (
             <li>
-              <a href={`/doctors/${doctor.id}`}>{doctor.name}</a>
+              <a href={`/doctors/${doctor.id}`}>{doctor.dr_name}</a>
             </li>
           ))
         }
