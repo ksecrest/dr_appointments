@@ -9,7 +9,8 @@ roles = ['primary', 'derm', 'ent', 'surgeon', 'cardiologist' ]
         user = User.create(
             full_name: Faker::Name.name,
             dob: Faker::Date.birthday,
-            contact_info: Faker::Address.full_address
+            address: Faker::Address.full_address,
+            email: Faker::Internet.email
         )
             
 
@@ -20,7 +21,7 @@ roles = ['primary', 'derm', 'ent', 'surgeon', 'cardiologist' ]
         doctor_id: doctor.id,
         user_id: user.id   
     )
-end
+    end
 end
 
 puts 'Data Seeded'
