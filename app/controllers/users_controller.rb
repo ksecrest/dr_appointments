@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
 
+  
+  before_action: set_user, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @user = User.all
+    render_component: 'Users', props: { user: @users }
+
+
   before_action :set_user, only:[:show, :edit, :update, :destroy]
   def index
     @users = User.all
@@ -49,3 +57,5 @@ class UsersController < ApplicationController
       params.require(:user).permit(:full_name, :dob, :email, :address)
     end
 end
+
+

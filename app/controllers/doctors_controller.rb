@@ -50,3 +50,17 @@ class DoctorsController < ApplicationController
       params.require(:doctor).permit(:dr_name)
     end
 end
+
+
+# user(patient) has_many doctors
+# doctors has_users(patients)
+
+# has many through:
+# user(patient) has_many doctors, through appointments
+# doctors has_many users(patients), through appointments
+
+#   billboard has many song, through artist 
+#   songs has many billboard through artist
+# User(patient) is a parent 
+# Doctor is a parent
+# Appoints would be a child of Doctors 
