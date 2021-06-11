@@ -1,10 +1,10 @@
 class AppointmentsController < ApplicationController
-  
   before_action :set_doctor
   before_action :set_appointment, only:[:show, :edit, :update, :destroy]
+
   def index
-    @doctors = Doctor.all
-    render component: 'Appointments', props: { appointments: @appointments, doctors: @doctors}
+    @appointments = @doctor.appoointments
+    render component: 'Appointments', props: { appointments: @appointments, doctor: @doctor}
   end
 
   def show
@@ -12,32 +12,39 @@ class AppointmentsController < ApplicationController
   end
 
   def new
-    @appointment = Appointment.new
+    @appointment = @doctor.appointment.new
     render component: 'AppointmentNew', props: { appointment: @appointment, docotor: @docotor }
   end
   
   def create
-    @user = User.all - @doctor.users
     @appointment = @doctor.appointments.new(appointment_params)
     if @appointment.save
-      redirect_to root_path
+      redirect_to doctor_appointments
     else
-      render component: 'AppointmentNew', props: { appointment: @appointment, user: @user, doctor: @doctor }
+      render component: 'AppointmentNew', props: { appointment: @appointment, doctor: @doctor }
     end
   end
 
-  def show
-
-  end
-
   def edit
-
+    render component: 'AppointmentEdit', props: { appointment: @appointment, doctor: @doctor }
   end
 
-  
+  def update
+    if @appointment.update(appointment_params)
+      redirect_to doctor_appointments
+    else
+      render component: 'AppointmentEdit', props: { appointment: @appointment, doctor: @doctor}
+    end
+  end
+
+  def destroy
+    @appointment.destroy
+    redirect_to doctor_appointments
+  end
+
   private
     def set_doctor
-      @doctor = Doctor.find(params[:id])
+      @doctor = Doctor.find(params[:doctor_id])
     end
 
     def set_appointment
