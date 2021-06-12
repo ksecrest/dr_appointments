@@ -3,8 +3,15 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only:[:show, :edit, :update, :destroy]
 
   def index
-    @appointments = @doctor.appoointments
-    render component: 'Appointments', props: { appointments: @appointments, doctor: @doctor}
+    @doctors = @doctor.appointments.where(role: 'doctor')
+    @nurses = @docotr.appointments.where(role: 'nurse')
+    @patients = @doctor.appointments.where(role: 'patient')
+    render component: 'Appointments', props: {
+      doctors: @doctors,
+      nurses: @nurses,
+      patients: @patients,
+      users: User.all
+    }
   end
 
   def show
@@ -12,16 +19,18 @@ class AppointmentsController < ApplicationController
   end
 
   def new
-    @appointment = @doctor.appointment.new
-    render component: 'AppointmentNew', props: { appointment: @appointment, docotor: @docotor }
+    @user = User.all - @doctor.users
+    @appointment = @doctor.appointment.new(appointment_params)
+    render component: 'AppointmentNew', props: { appointment: @appointment, docotor: @docotor, users: @users }
   end
   
   def create
+    @users = User.all - @doctor.users
     @appointment = @doctor.appointments.new(appointment_params)
     if @appointment.save
-      redirect_to doctor_appointments
+      redirect_to doctor_appointments(@appointment)
     else
-      render component: 'AppointmentNew', props: { appointment: @appointment, doctor: @doctor }
+      render component: 'AppointmentNew', props: { appointment: @appointment, doctor: @doctor, user: @users }
     end
   end
 
@@ -30,10 +39,11 @@ class AppointmentsController < ApplicationController
   end
 
   def update
+    @user = User.all - @doctor.users
     if @appointment.update(appointment_params)
-      redirect_to doctor_appointments
+      redirect_to doctor_appointments(@appointment)
     else
-      render component: 'AppointmentEdit', props: { appointment: @appointment, doctor: @doctor}
+      render component: 'AppointmentEdit', props: { appointment: @appointment, doctor: @doctor, user: @users}
     end
   end
 

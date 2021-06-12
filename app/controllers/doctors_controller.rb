@@ -1,6 +1,6 @@
 class DoctorsController < ApplicationController
+  before_action :set_doctor, only: [:show, :edit, :update, :destroy]
   
-  before_action :set_doctor, only:[:show, :edit, :update, :destroy]
   def index
     @doctors = Doctor.all
     render component: 'Doctors', props: { doctors: @doctors }
@@ -18,7 +18,7 @@ class DoctorsController < ApplicationController
   def create
     @doctor = Doctor.new(doctor_params)
     if @doctor.save
-      redirect_to root_path
+      redirect_to @doctor
     else
       render component: 'DoctorNew', props: { doctor: @doctor }
     end
@@ -30,7 +30,7 @@ class DoctorsController < ApplicationController
   
   def update
     if @doctor.update(doctor_params)
-      redirect_to root_path
+      redirect_to doctors_path
     else
       render component: 'DoctorEdit', props: { doctor: @doctor }
     end
