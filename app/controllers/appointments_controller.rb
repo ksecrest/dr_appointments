@@ -4,13 +4,16 @@ class AppointmentsController < ApplicationController
 
   def index
     @doctors = @doctor.appointments.where(role: 'doctor')
-    @nurses = @docotr.appointments.where(role: 'nurse')
+    @nurses = @doctor.appointments.where(role: 'nurse')
     @patients = @doctor.appointments.where(role: 'patient')
+    @appointments = Appointment.all
     render component: 'Appointments', props: {
       doctors: @doctors,
       nurses: @nurses,
       patients: @patients,
-      users: User.all
+      users: User.all,
+      appointments: @appointments,
+      doctor: @doctor
     }
   end
 
@@ -19,18 +22,18 @@ class AppointmentsController < ApplicationController
   end
 
   def new
-    @user = User.all - @doctor.users
-    @appointment = @doctor.appointment.new(appointment_params)
-    render component: 'AppointmentNew', props: { appointment: @appointment, docotor: @docotor, users: @users }
+    @users = User.all - @doctor.users
+    @appointment = @doctor.appointments.new
+    render component: 'AppointmentNew', props: { appointment: @appointment, doctor: @doctor, users: @users }
   end
   
   def create
     @users = User.all - @doctor.users
     @appointment = @doctor.appointments.new(appointment_params)
     if @appointment.save
-      redirect_to doctor_appointments(@appointment)
+      redirect_to doctor_appointments_path(@appointment)
     else
-      render component: 'AppointmentNew', props: { appointment: @appointment, doctor: @doctor, user: @users }
+      render component: 'AppointmentNew', props: { appointment: @appointment, doctor: @doctor, users: @users }
     end
   end
 
@@ -49,7 +52,7 @@ class AppointmentsController < ApplicationController
 
   def destroy
     @appointment.destroy
-    redirect_to doctor_appointments
+    redirect_to doctor_appointments_path
   end
 
   private
@@ -62,6 +65,6 @@ class AppointmentsController < ApplicationController
     end
 
     def appointment_params
-      params.require(:appointment).permit(:date, :time)
+      params.require(:appointment).permit(:date, :time, :user_id)
     end
 end

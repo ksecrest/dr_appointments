@@ -9,20 +9,18 @@ const User = ({ user, doctors }) => {
       <h2>Date of Birth: {dob}</h2>
       <p>Email:<strong> { email }</strong></p>
       <p>Address: <strong>{ address }</strong></p>
-      <h2>{ doctors.length <= 0 ? "No Doctors" : ""}</h2>
+      <h2>{ doctors.length <= 0 ? "No appointments with any Doctor" : ""}</h2>
       {/* <h5>Doctors</h5> */}
       <ul>
         {
           doctors.map( (doctor) => (
             <li>
-              <a href={`/doctors/${doctor.id}`}>{doctor.dr_name}</a>
+              <a href={`/doctors/${doctor.id}`}>Appointment with: Dr. {doctor.dr_name}</a>
             </li>
           ))
         }
       </ul>
       <a href={`/users/${id}/edit`}>Edit User</a>
-      <br />
-      <h2><a href={``}>View appointments</a></h2>
       <br />
       <a href={`/users`}>Back</a>
       <br />

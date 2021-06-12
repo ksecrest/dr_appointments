@@ -1,26 +1,48 @@
 import React from 'react';
 
-const Appointments = ({ appointments, doctor }) => {
-  const { errors } = appointments
+const Appointments = ({ doctor, doctors, nurses, patients, users, appointments }) => {
+
+  const { role, date, time } = appointments
+  const displayUser = (id) => {
+    let fullName
+    users.map((u) => {
+      if (u.id === id) {
+        fullName = u.full_name
+      }
+    })
+    return fullName
+  }
   return(
     <>
-      { errors && errors }
-      <h1>Appointments</h1>
-      <p><a href={`/`}>Back to {doctor}</a></p>
+      <h1>{doctor.dr_name} 'Appointments</h1>
+      <a href={`/doctors/${doctor.id}/appointments/new`}>Add Appointment</a>
       <br />
-      <a href={`/doctors/${doctor.id}/appointments/new`}>Create New Appointment</a>
-      <br />
-      {
-        appointments.map ((a) => (
-          <div key={a.id} className="appointment-card">
-            <h3><a href={`/doctors/${doctor.id}/appointments/${a.id}`}>Appointment</a></h3>
-            <h3><a href={`/doctors/${doctor.id}/appointments/${a.id}/edit`}>Edit Appointment</a></h3>
-            <h3><a href={`/doctors/${doctor.id}/appointments/${a.id}`} data-method="delete">Remove Appointment</a></h3>
-          </div>
-        ))
-      }
+      {/* <h2>Doctor</h2>
+      { doctors.map((doctor) => (
+        <div>
+          <p>{displayUser(doctor.user_id)}</p>
+          <a href={`/doctors/${doctor.id}/appointments/${doctor.id}`} data-method="delete">Delete</a>
+        </div>
+      ))} */}
+      <h2>Appointment</h2>
+      <p>{date}</p>
+      <p>{time}</p>
+      <h2>Nurses</h2>
+      { nurses.map((nurse) => (
+        <div>
+          <p>{displayUser(nurse.user_id)}</p>
+          <a href={`/doctors/${doctor.id}/appointments/${nurse.id}`} data-method="delete">Delete</a>
+        </div>
+      ))}
+      <h2>Patient</h2>
+      { patients.map ((patient) => (
+        <div>
+          <p>{displayUser(patient.user_id)}</p>
+          <a href={`/doctors/${doctor.id}/appointments/${patient.id}`} data-method="delete">Delete</a>
+        </div>
+      ))}
     </>
-  )
+  );
 }
 
-export default Appointments;
+export default Appointments; 

@@ -11,8 +11,8 @@ class DoctorsController < ApplicationController
   end
 
   def new
-    @doctor = doctor.new
-    render componet: 'DoctorNew', props: { doctor: @doctor }
+    @doctor = Doctor.new
+    render component: 'DoctorNew', props: { doctor: @doctor }
   end 
 
   def create
