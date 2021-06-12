@@ -1,14 +1,18 @@
 import React from 'react';
 
 const Doctors = ({ doctors }) => {
-  const { dr_name, errors } = doctors
+  const { dr_name, errors } = doctors;
   return(
     <>
+      <h1>All Doctors</h1>
       { errors && errors }
       {
         doctors.map( (doctor) => (
-          <h2><a href={`/doctors`}>{dr_name}</a></h2>
-          // <h2><a href={`/doctors/${doctor.id}/edit`}>Edit Doctor</a></h2>
+          <div>
+            <h2><a href={`/doctors/${doctor.id}`}>{doctor.dr_name}</a></h2>
+            <h4><a href={`/doctors/${doctor.id}/edit`}>Edit Doctor</a></h4>
+            <h4><a href={`/doctors/${doctor.id}`} data-method="delete">Delete Doctor</a></h4>
+          </div>
         ))
       }
     </>

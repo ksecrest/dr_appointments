@@ -7,7 +7,7 @@ const Users = ({ users }) => {
       <h1>All Users</h1>
       <a href="/users/new">Add a new User</a>
       <br />
-      {/* { users.length <= 0 ? "No users" : ""} */}
+      <h2>{ users.length <= 0 ? "No Users" : ""}</h2>
       {
         users.map( (u) => (
           <div>
@@ -20,4 +20,4 @@ const Users = ({ users }) => {
     </>
   );
 }
-export default Users;
+export default Users; 
