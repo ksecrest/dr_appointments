@@ -2,32 +2,30 @@ import React from 'react';
 
 const AppointmentNew = ({ appointment, doctor, users }) => {
   const {schedule, point, role, user_id } = appointment;
-  const defaultDate = schedule  ? schedule : "";
+  const defaultSchedule = schedule  ? schedule : "";
   const defaultTime = point ? point : "";
   const defaultUser = user_id ? user_id : "";
   const defaultRole = role ? role : "";
   return (
     <>
-      <form action={`/doctors/${doctor.id}/appointments/new`} method="post">
+      <form action={`/doctors/${doctor.id}/appointments`} method="post">
         <fieldset>
           <legend>Create new Appointment</legend>
         <h1>Date</h1>
         <input
-          defaultValue={defaultDate}
-          name= "appointment[date]"
+          defaultValue={defaultSchedule}
+          name= "appointment[schedule]"
           placeholder= "MM/DD/YYYY"
           type= "date"
-          // min          = "100"
-          // max          = "2400"
           required
         />
         <br />
         <h1>Time</h1>
         <input
           defaultValue = {defaultTime}
-          name= "appointment[Time]"
-          placeholder= "0-24HRS"
-          type= "number"
+          name= "appointment[point]"
+          placeholder= "12:00 PM"
+          type= "time"
           required
         />
         <br />
@@ -65,7 +63,7 @@ export default AppointmentNew;
 //   const defaultRole = role ? role : ""
 //   const defaultUser = user_id ? user_id : ""
 //   const defaultTime = time ? time : ""
-//   const defaultDate = date ? date : ""
+//   const defaultSchedule = date ? date : ""
 //   return (
 //     <>
 //       <h1>Add appointment</h1>
@@ -87,7 +85,7 @@ export default AppointmentNew;
 //         <h1>Date</h1>
 //         <input
 //           type="date"
-//           defaultValue={defaultDate}
+//           defaultValue={defaultSchedule}
 //           name="appointment[date]"
 //           placeholder='MM/DD/YYYY'
 //           // min= "100"

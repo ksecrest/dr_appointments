@@ -1,6 +1,6 @@
 import React from 'react';
 
-const User = ({ user, doctors }) => {
+const User = ({ user, doctor }) => {
   const { id, full_name, dob, address, email, errors } = user;
   return(
     <>
@@ -9,11 +9,11 @@ const User = ({ user, doctors }) => {
       <h2>Date of Birth: {dob}</h2>
       <p>Email:<strong> { email }</strong></p>
       <p>Address: <strong>{ address }</strong></p>
-      <h2>{ doctors.length <= 0 ? "No appointments with any Doctor" : ""}</h2>
+      <h2>{ user.length  <= 0 ? "No appointments with any Doctor" : ""}</h2>
       {/* <h5>Doctors</h5> */}
       <ul>
         {
-          doctors.map( (doctor) => (
+          doctor.map( (doctor) => (
             <li>
               <a href={`/doctors/${doctor.id}`}>Appointment with: Dr. {doctor.dr_name}</a>
             </li>
@@ -29,4 +29,4 @@ const User = ({ user, doctors }) => {
     </>
   );
 }
-export default User;
+export default User; 

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render component: 'User', props: { user: @user.doctors, fullName: @user.full_name }
+    render component: 'User', props: { user: @user, doctor: @user.doctors, fullName: @user.full_name }
   end
 
   def new
