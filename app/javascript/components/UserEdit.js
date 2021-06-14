@@ -2,7 +2,7 @@ import React from "react";
 
 const UserEdit = ({ user }) => {
 
-  const { full_name, id } = user
+  const { full_name, id, dob, address, email } = user
   const defaultFull_name = full_name ? full_name : "";
   const defaultDob = dob ? dob : "";
   const defaultAddress = address ? address : "";
@@ -13,7 +13,7 @@ const UserEdit = ({ user }) => {
       <form action={`/users/${id}`} method="post">
         <input type='hidden' name="_method" value="patch" />
         <br />
-        <p>Full Name</p>
+        <p>Full Name:</p>
         <input
           placeholder="Full Name"
           type="text"
@@ -22,14 +22,16 @@ const UserEdit = ({ user }) => {
           name="user[full_name]"
         />
         <br />
-        <p>Date of Birth</p>
+        <p>Date of Birth:</p>
         <input
           placeholder="dob"
-          type="text"
+          type="date"
           required
           defaultValue={defaultDob}
           name="user[dob]"
         />
+        <br />
+        <p>Email:</p>
         <input
           required
           placeholder="email"
@@ -38,7 +40,7 @@ const UserEdit = ({ user }) => {
           name="user[email]"
         />
         <br />
-        <p>Address</p>
+        <p>Address:</p>
         <input
           required
           placeholder="address"

@@ -11,7 +11,7 @@ const Appointment = ({ appointment, doctor }) => {
         <p>Would you like to edit it ?</p>
         <a href={`/doctor/${doctor.id}/appointments/${id}/edit`}>Edit Appointment</a>
       </div>
-      <a href={``}>Back(Doesn't work)</a>
+      {/* <a href={``}>Back(Doesn't work)</a> */}
     </>
   )
 }
