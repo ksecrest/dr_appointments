@@ -13,8 +13,8 @@ roles = ['doctor', 'nurse', 'patient']
 
         Appointment.create(
             role: roles.sample,
-            date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
-            time: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
+            schedule: Faker::Date.between(from: Date.today, to: 1.year.from_now),
+            point: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
             doctor_id: doct.id,
             user_id: u.id
         )

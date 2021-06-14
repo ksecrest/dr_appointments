@@ -2,7 +2,7 @@ import React from 'react';
 
 const Appointments = ({ doctor, doctors, nurses, patients, users, appointments }) => {
 
-  const { role, date, time } = appointments
+  const { role, schedule, point } = appointments
   const displayUser = (id) => {
     let fullName
     users.map((u) => {
@@ -17,20 +17,21 @@ const Appointments = ({ doctor, doctors, nurses, patients, users, appointments }
       <h1>{doctor.dr_name} 'Appointments</h1>
       <a href={`/doctors/${doctor.id}/appointments/new`}>Add Appointment</a>
       <br />
-      {/* <h2>Doctor</h2>
+      <h2>Doctor</h2>
       { doctors.map((doctor) => (
         <div>
           <p>{displayUser(doctor.user_id)}</p>
+          <a href={`/doctors/${doctor.id}/appointments/${doctor.id}/edit`}>Edit</a>
+          <br />
           <a href={`/doctors/${doctor.id}/appointments/${doctor.id}`} data-method="delete">Delete</a>
         </div>
-      ))} */}
-      <h2>Appointment</h2>
-      <p>{date}</p>
-      <p>{time}</p>
+      ))}
       <h2>Nurses</h2>
       { nurses.map((nurse) => (
         <div>
           <p>{displayUser(nurse.user_id)}</p>
+          <a href={`/doctors/${doctor.id}/appointments/${nurse.id}/edit`}>Edit</a>
+          <br />
           <a href={`/doctors/${doctor.id}/appointments/${nurse.id}`} data-method="delete">Delete</a>
         </div>
       ))}
@@ -38,6 +39,8 @@ const Appointments = ({ doctor, doctors, nurses, patients, users, appointments }
       { patients.map ((patient) => (
         <div>
           <p>{displayUser(patient.user_id)}</p>
+          <a href={`/doctors/${doctor.id}/appointments/${patient.id}/edit`}>Edit</a>
+          <br />
           <a href={`/doctors/${doctor.id}/appointments/${patient.id}`} data-method="delete">Delete</a>
         </div>
       ))}
@@ -46,3 +49,4 @@ const Appointments = ({ doctor, doctors, nurses, patients, users, appointments }
 }
 
 export default Appointments; 
+

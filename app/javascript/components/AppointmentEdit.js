@@ -1,7 +1,12 @@
+import { userSetter } from 'core-js/fn/symbol';
 import React from 'react';
 
-const AppointmentEdit = ({ appointment, doctor }) => {
-  const { date, time, errors, id } = appointment;
+const AppointmentEdit = ({ appointment, doctor, users }) => {
+  const { schedule, point, role, errors, user_id, id } = appointment;
+  const defaultSchedule = schedule ? schedule : "";
+  const defaultPoint = point ? point : "";
+  const defaultRole = role ? role : "";
+  const defaultUser = user_id ? user_id : "";
   return(
     <>
       { errors && errors }
@@ -11,21 +16,32 @@ const AppointmentEdit = ({ appointment, doctor }) => {
           <input type="hidden" name="_method" value="patch"/>
           <p>Date</p>
           <input
-          defaultValue = {date}
+          defaultValue = {defaultSchedule}
           placeholder  = "MM/DD/YYYY"
-          name         = "appointment[date]"
-          type         = "text"
+          name         = "appointment[schedule]"
+          type         = "date"
           />
           <br />
           <p>Time</p>
           <input
-          defaultValue= {time}
-          placeholder = "0-24HRS"
-          name        = "appointment[time]"
-          type        = "text"
+          defaultValue= {defaultPoint}
+          placeholder = "12:00 P.M."
+          name        = "appointment[point]"
+          type        = "time"
           />
-          <button type="submit">Update</button>
           <br />
+          <select name="appointment[role" id="role" defaultValue={defaultRole} required>
+            <option value="doctor">Doctor</option>
+            <option value="nurse">Nurse</option>
+            <option value="patient">Patient</option>
+          </select>
+          <br />
+          <select name="appointment[user_id]" id="user_id" defaultValue={defaultUser} required>
+            { users.map ( (u) => (
+              <option value={u.id}>{u.full_name}</option>
+            ))}
+          </select>
+          <button type="submit">Update</button>
         </fieldset>
       </form>
     </>

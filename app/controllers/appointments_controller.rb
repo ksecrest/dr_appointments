@@ -31,7 +31,7 @@ class AppointmentsController < ApplicationController
     @users = User.all - @doctor.users
     @appointment = @doctor.appointments.new(appointment_params)
     if @appointment.save
-      redirect_to doctor_appointments_path(@appointment)
+      redirect_to doctor_appointments_path
     else
       render component: 'AppointmentNew', props: { appointment: @appointment, doctor: @doctor, users: @users }
     end
@@ -44,7 +44,7 @@ class AppointmentsController < ApplicationController
   def update
     @user = User.all - @doctor.users
     if @appointment.update(appointment_params)
-      redirect_to doctor_appointments(@appointment)
+      redirect_to doctor_appointments
     else
       render component: 'AppointmentEdit', props: { appointment: @appointment, doctor: @doctor, user: @users}
     end
@@ -65,6 +65,6 @@ class AppointmentsController < ApplicationController
     end
 
     def appointment_params
-      params.require(:appointment).permit(:date, :time, :user_id)
+      params.require(:appointment).permit(:schedule, :point, :role, :user_id)
     end
 end
