@@ -30,7 +30,7 @@ class DoctorsController < ApplicationController
   
   def update
     if @doctor.update(doctor_params)
-      redirect_to doctors_path
+      redirect_to @doctor
     else
       render component: 'DoctorEdit', props: { doctor: @doctor }
     end

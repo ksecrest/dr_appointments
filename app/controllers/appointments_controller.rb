@@ -26,6 +26,7 @@ class AppointmentsController < ApplicationController
     @appointment = @doctor.appointments.new
     render component: 'AppointmentNew', props: { appointment: @appointment, doctor: @doctor, users: @users }
   end
+
   
   def create
     @users = User.all - @doctor.users

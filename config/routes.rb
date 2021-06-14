@@ -8,9 +8,3 @@ root 'doctors#index'
   end
 end
 
-
-# root 'courses#index'
-#     resources :users 
-#     resources :courses do
-#       resources :enrollments
-#     end
