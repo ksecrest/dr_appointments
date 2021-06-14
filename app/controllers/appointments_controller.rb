@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
   before_action :set_doctor
+  before_action :set_user
   before_action :set_appointment, only:[:show, :edit, :update, :destroy]
 
   def index
@@ -13,7 +14,8 @@ class AppointmentsController < ApplicationController
       patients: @patients,
       users: User.all,
       appointments: @appointments,
-      doctor: @doctor
+      doctor: @doctor,
+      userss: @users
     }
   end
 
@@ -22,13 +24,11 @@ class AppointmentsController < ApplicationController
   end
 
   def new
-    @users = User.all - @doctor.users
     @appointment = @doctor.appointments.new
     render component: 'AppointmentNew', props: { appointment: @appointment, doctor: @doctor, users: @users }
   end
   
   def create
-    @users = User.all - @doctor.users
     @appointment = @doctor.appointments.new(appointment_params)
     if @appointment.save
       redirect_to doctor_appointments_path
@@ -38,15 +38,14 @@ class AppointmentsController < ApplicationController
   end
 
   def edit
-    render component: 'AppointmentEdit', props: { appointment: @appointment, doctor: @doctor }
+    render component: 'AppointmentEdit', props: { appointment: @appointment, doctor: @doctor, users: @users }
   end
 
   def update
-    @user = User.all - @doctor.users
     if @appointment.update(appointment_params)
       redirect_to doctor_appointments
     else
-      render component: 'AppointmentEdit', props: { appointment: @appointment, doctor: @doctor, user: @users}
+      render component: 'AppointmentEdit', props: { appointment: @appointment, doctor: @doctor, users: @users}
     end
   end
 
@@ -60,6 +59,10 @@ class AppointmentsController < ApplicationController
       @doctor = Doctor.find(params[:doctor_id])
     end
 
+    def set_user
+      @users = User.all - @doctor.users
+    end
+
     def set_appointment
       @appointment = Appointment.find(params[:id])
     end
@@ -68,3 +71,4 @@ class AppointmentsController < ApplicationController
       params.require(:appointment).permit(:schedule, :point, :role, :user_id)
     end
 end
+ 

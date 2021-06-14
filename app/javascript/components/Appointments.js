@@ -18,12 +18,12 @@ const Appointments = ({ doctor, doctors, nurses, patients, users, appointments }
       <a href={`/doctors/${doctor.id}/appointments/new`}>Add Appointment</a>
       <br />
       <h2>Doctor</h2>
-      { doctors.map((doctor) => (
+      { doctors.map( (d) => (
         <div>
-          <p>{displayUser(doctor.user_id)}</p>
-          <a href={`/doctors/${doctor.id}/appointments/${doctor.id}/edit`}>Edit</a>
+          <p>{displayUser(d.user_id)}</p>
+          <a href={`/doctors/${doctor.id}/appointments/${d.id}/edit`}>Edit</a>
           <br />
-          <a href={`/doctors/${doctor.id}/appointments/${doctor.id}`} data-method="delete">Delete</a>
+          <a href={`/doctors/${doctor.id}/appointments/${d.id}`} data-method="delete">Delete</a>
         </div>
       ))}
       <h2>Nurses</h2>
