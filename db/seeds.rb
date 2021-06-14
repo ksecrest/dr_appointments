@@ -1,25 +1,18 @@
 roles = ['doctor', 'nurse', 'patient']
-5.times do
+10.times do
     doct = Doctor.create(
         dr_name: Faker::Name.last_name
     )
-    3.times do
+    10.times do
         u = User.create(
             full_name: Faker::Name.name,
             dob: Faker::Date.birthday,
-            address: Faker::Address.full_address,
-            email: Faker::Internet.safe_email
-        )
+	@@ -13,31 +13,17 @@
 
         Appointment.create(
             role: roles.sample,
-<<<<<<< HEAD
             schedule: Faker::Date.between(from: Date.today, to: 1.year.from_now),
             point: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
-=======
-            # date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
-            # time: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
->>>>>>> 1103818 (added styling)
             doctor_id: doct.id,
             user_id: u.id
         )
