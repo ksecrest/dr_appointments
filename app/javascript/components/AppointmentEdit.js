@@ -45,7 +45,7 @@ const AppointmentEdit = ({ appointment, doctor, users }) => {
         </fieldset>
       </form>
     </>
-  )
+  );
 }
 
 export default AppointmentEdit;
