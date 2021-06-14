@@ -2,7 +2,7 @@ import React from "react";
 
 const UserEdit = ({ user }) => {
 
-  const { full_name , id, address, email, dob } = user
+  const { full_name, id } = user
   const defaultFull_name = full_name ? full_name : "";
   const defaultDob = dob ? dob : "";
   const defaultAddress = address ? address : "";
@@ -30,8 +30,6 @@ const UserEdit = ({ user }) => {
           defaultValue={defaultDob}
           name="user[dob]"
         />
-        <br />
-        <p>Email</p>
         <input
           required
           placeholder="email"

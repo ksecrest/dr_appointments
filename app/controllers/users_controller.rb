@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render component: 'User', props: { user: @user, doctors: @user.doctors }
+    render component: 'User', props: { user: @user.doctors, fullName: @user.full_name }
   end
 
   def new
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to users_path
+      redirect_to @user
     else
       render component: 'UserNew', props: { user: @user }
     end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to users_path
+      redirect_to @user
     else
       render component: 'UserEdit', props: { user: @user }
     end

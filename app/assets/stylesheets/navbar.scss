@@ -1,0 +1,19 @@
+.drappmt-navbar {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0.5rem;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  
+    &_link {
+      &--logo {
+        // flex: 0 1 100%;
+        flex-grow: 0;
+        flex-shrink: 1;
+        flex-basis: 100%;
+      }
+      display: inline-flex;
+      padding: 0 0.5rem;
+    }
+  }

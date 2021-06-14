@@ -1,9 +1,9 @@
 roles = ['doctor', 'nurse', 'patient']
-10.times do
+5.times do
     doct = Doctor.create(
         dr_name: Faker::Name.last_name
     )
-    10.times do
+    3.times do
         u = User.create(
             full_name: Faker::Name.name,
             dob: Faker::Date.birthday,
@@ -13,8 +13,13 @@ roles = ['doctor', 'nurse', 'patient']
 
         Appointment.create(
             role: roles.sample,
+<<<<<<< HEAD
             schedule: Faker::Date.between(from: Date.today, to: 1.year.from_now),
             point: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
+=======
+            # date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
+            # time: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
+>>>>>>> 1103818 (added styling)
             doctor_id: doct.id,
             user_id: u.id
         )
@@ -22,22 +27,3 @@ roles = ['doctor', 'nurse', 'patient']
 end
 
 puts 'Data Seeded'
-#  doctor = Doctor.create(
-#         dr_name: Faker::Name.last_name 
-#     )
-
-#     10.times do 
-#         user = User.create(
-#             full_name: Faker::Name.name,
-#             dob: Faker::Date.birthday,
-#             address: Faker::Address.full_address,
-#             email: Faker::Internet.safe_email
-#         )
-
-#         Appointment.create(
-#             role: roles.sample,
-#             date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
-#             time: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
-#             doctor_id: doctor.id,
-#             user_id: user.id,
-#             )
