@@ -6,5 +6,5 @@ class Appointment < ApplicationRecord
     message: "%{value} is not a valid role", allow_blank: false 
 }
   validates :role, :schedule, :point, presence: true
-  validates :schedule, uniqueness: true
+  # validates :point, uniqueness: true
 end
